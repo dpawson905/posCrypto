@@ -30,7 +30,8 @@ class Blockchain():
             return False
 
     def lastBlockHashValid(self, block):
-        latestBlockchainBlockHash = BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest()
+        latestBlockchainBlockHash = BlockchainUtils.hash(
+            self.blocks[-1].payload()).hexdigest()
         if latestBlockchainBlockHash == block.lastHash:
             return True
         else:
@@ -48,7 +49,8 @@ class Blockchain():
     def transactionCovered(self, transaction):
         if transaction.type == 'EXCHANGE':
             return True
-        senderBalance = self.accountModel.getBalance(transaction.senderPublicKey)
+        senderBalance = self.accountModel.getBalance(
+            transaction.senderPublicKey)
         if senderBalance >= transaction.amount:
             return True
         else:
@@ -73,8 +75,24 @@ class Blockchain():
             self.accountModel.updateBalance(sender, -amount)
             self.accountModel.updateBalance(receiver, amount)
 
-    
     def nextForger(self):
-        lastBlockHash = BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest()
+        lastBlockHash = BlockchainUtils.hash(
+            self.blocks[-1].payload()).hexdigest()
         nextForger = self.pos.forger(lastBlockHash)
         return nextForger
+
+    def createBlock(self, transactionsFromPool, forgerWallet):
+        coveredTransactions = self.getCoveredTransactionSet(
+            transactionsFromPool)
+        self.executeTransactions(coveredTransactions)
+        newBlock = forgerWallet.createBlock(coveredTransactions, BlockchainUtils.hash(
+            self.blocks[-1].payload()).hexdigest(), len(self.blocks))
+        self.blocks.append(newBlock)
+        return newBlock
+
+    def transactionExists(self, transaction):
+        for block in self.blocks:
+            for blockTransaction in block.transactions:
+                if transaction.equals(blockTransaction):
+                    return True
+        return False
