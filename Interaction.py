@@ -11,6 +11,7 @@ def postTransaction(sender, receiver, amount, type):
     request = requests.post(url, json=package)
     print(request.text)
 
+
 if __name__ == '__main__':
 
     bob = Wallet()
@@ -25,4 +26,3 @@ if __name__ == '__main__':
 
     # forger: alice
     postTransaction(alice, bob, 1, 'TRANSFER')
-    

@@ -108,5 +108,5 @@ class Blockchain():
     def transactionsValid(self, transactions):
         coveredTransactions = self.getCoveredTransactionSet(transactions)
         if len(coveredTransactions) == len(transactions):
-            return True 
+            return True
         return False

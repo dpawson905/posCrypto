@@ -20,7 +20,7 @@ class NodeAPI(FlaskView):
 
     @route('/info', methods=['GET'])
     def info(self):
-        return 'This is a communiction interface to a nodes blockchain', 200
+        return 'This is a communication interface to a nodes blockchain', 200
 
     @route('/blockchain', methods=['GET'])
     def blockchain(self):

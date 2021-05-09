@@ -21,4 +21,3 @@ if __name__ == '__main__':
     node = Node(ip, port, keyFile)
     node.startP2P()
     node.startAPI(apiPort)
-    

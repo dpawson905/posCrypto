@@ -3,13 +3,15 @@ from Lot import Lot
 import string
 import random
 
+
 def getRandomString(length):
     letters = string.ascii_lowercase
     resultString = ''.join(random.choice(letters) for i in range(length))
     return resultString
 
-bobStake = random.randint(0,100)
-aliceStake = random.randint(0,100)
+
+bobStake = random.randint(0, 100)
+aliceStake = random.randint(0, 100)
 
 if __name__ == '__main__':
     pos = ProofOfStake()
@@ -27,4 +29,5 @@ if __name__ == '__main__':
             aliceWins += 1
 
     print('bob won: ' + str(bobWins) + ' times with ' + str(bobStake) + ' coins')
-    print('alice won: ' + str(aliceWins) + ' times with ' + str(aliceStake) + ' coins')
+    print('alice won: ' + str(aliceWins) +
+          ' times with ' + str(aliceStake) + ' coins')

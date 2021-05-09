@@ -7,6 +7,7 @@ from Message import Message
 from BlockchainUtils import BlockchainUtils
 import copy
 
+
 class Node():
 
     def __init__(self, ip, port, key=None):
@@ -53,7 +54,8 @@ class Node():
         blockCountValid = self.blockchain.blockCountValid(block)
         lastBlockHash = self.blockchain.lastBlockHashValid(block)
         forgerValid = self.blockchain.forgerValid(block)
-        transactionsValid = self.blockchain.transactionsValid(block.transactions)
+        transactionsValid = self.blockchain.transactionsValid(
+            block.transactions)
         signatureValid = Wallet.signatureValid(blockHash, signature, forger)
         if not blockCountValid:
             self.requestChain()
@@ -70,7 +72,8 @@ class Node():
         self.p2p.broadcast(encodedMessage)
 
     def handleBlockchainRequest(self, requestingNode):
-        message = Message(self.p2p.socketConnector, 'BLOCKCHAIN', self.blockchain)
+        message = Message(self.p2p.socketConnector,
+                          'BLOCKCHAIN', self.blockchain)
         encodedMessage = BlockchainUtils.encode(message)
         self.p2p.send(requestingNode, encodedMessage)
 

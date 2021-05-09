@@ -4,6 +4,7 @@ from SocketConnector import SocketConnector
 from BlockchainUtils import BlockchainUtils
 import json
 
+
 class SocketCommunication(Node):
 
     def __init__(self, ip, port):

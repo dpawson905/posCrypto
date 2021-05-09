@@ -2,6 +2,7 @@ import uuid
 import time
 import copy
 
+
 class Transaction():
 
     def __init__(self, senderPublicKey, receiverPublicKey, amount, type):

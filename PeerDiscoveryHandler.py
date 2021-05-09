@@ -56,4 +56,5 @@ class PeerDiscoveryHandler():
                 if peer.equals(peersPeer):
                     peerKnown = True
             if not peerKnown and not peersPeer.equals(self.socketCommunication.socketConnector):
-                self.socketCommunication.connect_with_node(peersPeer.ip, peersPeer.port)
+                self.socketCommunication.connect_with_node(
+                    peersPeer.ip, peersPeer.port)
